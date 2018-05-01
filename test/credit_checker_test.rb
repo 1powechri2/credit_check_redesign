@@ -19,11 +19,23 @@ class CreditCheckTest < Minitest::Test
     assert_instance_of CreditCheck, @credit_check
   end
 
-  def test_init_numb_equal_zero_by_default
-    assert_equal 0, @credit_check.numb
+  def test_init_numb_array_equal_zero_by_default
+    assert @credit_check.numb.include? 0
   end
 
   def test_init_numb_changes_with_argument
-    assert_equal 5541808923795240, @valid_1.numb
+    actual = @valid_1.numb
+    expected = [5,5,4,1,8,0,8,9,2,3,7,9,5,2,4,0]
+    assert_equal expected, actual
+  end
+
+  def test_amex_vs_all_other
+    assert 13, @amex_invalid.numb.length
+    assert 14, @valid_2.numb.length
+  end
+
+  def test_doubling_luhn_alorithm_digits
+    assert @amex_invalid.numb[0].odd?
+    assert @valid_3.numb[0].even?
   end
 end
