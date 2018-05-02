@@ -40,5 +40,13 @@ class CreditCheck
         num
       end
     end
-  end 
+  end
+
+  def sum_processed_card_number
+    nums_over_ten_minus_nine.sum
+  end
+
+  def card_valid?
+    sum_processed_card_number % 10 == 0
+  end
 end

@@ -51,4 +51,28 @@ class CreditCheckTest < Minitest::Test
     actual   = @valid_1.nums_over_ten_minus_nine
     assert_equal expected, actual
   end
+
+  def test_sum_processed_card_number
+    @valid_1.double_card_numbers
+    assert_equal 70, @valid_1.sum_processed_card_number
+  end
+
+  def test_card_valid?
+    @valid_1.double_card_numbers
+    assert @valid_1.card_valid?
+    @valid_2.double_card_numbers
+    assert @valid_2.card_valid?
+    @valid_3.double_card_numbers
+    assert @valid_3.card_valid?
+    @invalid_1.double_card_numbers
+    refute @invalid_1.card_valid?
+    @invalid_2.double_card_numbers
+    refute @invalid_2.card_valid?
+    @invalid_3.double_card_numbers
+    refute @invalid_3.card_valid?
+    @amex_valid.double_card_numbers
+    assert @amex_valid.card_valid?
+    @amex_invalid.double_card_numbers
+    refute @amex_invalid.card_valid?
+  end
 end
